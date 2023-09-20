@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_register">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/user_name_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:lines="1"
+            android:minLines="1"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:lines="1"
+            android:minLines="1"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/light_blue"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:lines="1"
+            android:minLines="1"
+            android:maxLines="1"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_account_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:backgroundTint="@color/light_blue"
+        android:drawableEnd="@drawable/ic_arrow"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="14dp"
+        android:textSize="14sp"
+        android:text="Create Account"
+        app:cornerRadius="6dp"
+        />
+
+
+</LinearLayout>

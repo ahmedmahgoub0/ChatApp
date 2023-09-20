@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ChatApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+
+        <item name="colorSecondary">@color/light_blue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/white</item>
+
+    </style>
+
+    <style name="Theme.ChatApp" parent="Base.Theme.ChatApp" />
+</resources>

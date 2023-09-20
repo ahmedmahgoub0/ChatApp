@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_login">
+
+    <TextView
+        android:id="@+id/welcome_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:text="Welcome back!"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:lines="1"
+            android:minLines="1"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/light_blue"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"
+            android:lines="1"
+            android:minLines="1"
+            android:maxLines="1"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="14dp"
+        android:text="Forgot password?"
+        android:textColor="@color/grey"
+        android:textSize="14sp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/light_blue"
+        android:drawableEnd="@drawable/ic_arrow"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="14dp"
+        android:text="Login"
+        android:textSize="14sp"
+        app:cornerRadius="6dp" />
+    <TextView
+        android:id="@+id/create_new_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="18dp"
+        android:text="Or Create My Account"
+        android:clickable="true"
+        android:textColor="@color/grey"
+        android:textSize="14sp" />
+
+</LinearLayout>
