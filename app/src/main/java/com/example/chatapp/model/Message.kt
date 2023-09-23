@@ -1,4 +1,4 @@
-package com.example.chatapp.ui
+package com.example.chatapp.model
 
 import android.content.DialogInterface
 

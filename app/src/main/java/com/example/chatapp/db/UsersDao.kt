@@ -11,7 +11,7 @@ object UsersDao {
 
     private fun getUserCollection(): CollectionReference {
         val firestore = Firebase.firestore
-        return firestore.collection(DatabaseConstants.USERS_COLLECTION_PATH)
+        return firestore.collection(User.COLLECTION_NAME)
     }
 
     fun createUser(user: User, onCompleteListener: OnCompleteListener<Void>) {

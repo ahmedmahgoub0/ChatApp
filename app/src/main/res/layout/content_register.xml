@@ -21,7 +21,7 @@
             android:id="@+id/user_name_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="160dp"
             app:error="@{vm.userNameError}">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -68,7 +68,7 @@
             android:layout_marginTop="4dp"
             app:error="@{vm.passwordError}"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/light_blue">
+            app:passwordToggleTint="@color/primary">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_et"
@@ -92,7 +92,7 @@
             android:layout_marginTop="4dp"
             app:error="@{vm.passwordConfirmError}"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/light_blue">
+            app:passwordToggleTint="@color/primary">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_confirm_et"
@@ -114,7 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/light_blue"
+            android:backgroundTint="@color/primary"
             android:drawableEnd="@drawable/ic_arrow"
             android:fontFamily="@font/poppins_semi_bold"
             android:gravity="center_vertical"

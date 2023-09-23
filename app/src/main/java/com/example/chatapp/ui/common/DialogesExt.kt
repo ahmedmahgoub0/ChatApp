@@ -2,7 +2,8 @@ package com.example.chatapp.ui.common
 
 import android.app.Activity
 import android.app.AlertDialog
-import com.example.chatapp.ui.Message
+import android.app.ProgressDialog
+import com.example.chatapp.model.Message
 
 fun Activity.showMessage(message: Message): AlertDialog {
     val dialogBuilder = AlertDialog.Builder(this)
@@ -21,4 +22,14 @@ fun Activity.showMessage(message: Message): AlertDialog {
     }
     dialogBuilder.setCancelable(message.isCancellable)
     return dialogBuilder.show()
+}
+
+fun Activity.showLoadingProgressDialog(
+    message: String,
+    isCancellable: Boolean = true
+): AlertDialog {
+    val alertDialog = ProgressDialog(this)
+    alertDialog.setMessage(message)
+    alertDialog.setCancelable(isCancellable)
+    return alertDialog
 }

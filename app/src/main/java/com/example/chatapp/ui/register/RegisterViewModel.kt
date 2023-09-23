@@ -5,18 +5,18 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chatapp.db.UsersDao
+import com.example.chatapp.model.Message
 import com.example.chatapp.model.User
-import com.example.chatapp.ui.Message
 import com.example.chatapp.ui.SessionProvider
 import com.example.chatapp.ui.common.SingleLiveEvent
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class RegisterViewModel : ViewModel() {
 
     val messageLiveData = SingleLiveEvent<Message>()
     val eventLiveData = SingleLiveEvent<RegisterViewEvent>()
+    val loadingLiveData = SingleLiveEvent<Message?>()
 
     val userName = MutableLiveData<String>()
     val email = MutableLiveData<String>()
@@ -29,7 +29,6 @@ class RegisterViewModel : ViewModel() {
     val passwordConfirmError = MutableLiveData<String?>()
 
     private var auth = Firebase.auth
-    private var firestore = Firebase.firestore
 
     fun navigateToLogin() {
         eventLiveData.postValue(RegisterViewEvent.NavigateToLogin)
@@ -37,10 +36,17 @@ class RegisterViewModel : ViewModel() {
 
     fun register() {
         if (!validForm()) return
+        loadingLiveData.postValue(
+            Message(
+                message = "loading...",
+                isCancellable = false
+            )
+        )
         auth.createUserWithEmailAndPassword(
             email.value!!,
             password.value!!
         ).addOnCompleteListener { task ->
+            loadingLiveData.postValue(null)
             if (task.isSuccessful) {
                 Log.d(TAG, "createUserWithEmail:success")
                 insertUserToFirestore(task.result.user?.uid)

@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chatapp.db.UsersDao
+import com.example.chatapp.model.Message
 import com.example.chatapp.model.User
-import com.example.chatapp.ui.Message
 import com.example.chatapp.ui.SessionProvider
 import com.example.chatapp.ui.common.SingleLiveEvent
 import com.google.firebase.auth.ktx.auth
@@ -16,10 +16,10 @@ class LoginViewModel : ViewModel() {
 
     val messageLiveData = SingleLiveEvent<Message>()
     val eventLiveData = SingleLiveEvent<LoginViewEvent>()
+    val loadingLiveEvent = SingleLiveEvent<Message?>()
 
-    val email = MutableLiveData<String>()
-    val password = MutableLiveData<String>()
-
+    val email = MutableLiveData<String>("ahmed1@route.com")
+    val password = MutableLiveData<String>("123456")
     val emailError = MutableLiveData<String?>()
     val passwordError = MutableLiveData<String?>()
 
@@ -31,10 +31,17 @@ class LoginViewModel : ViewModel() {
 
     fun login() {
         if (!validForm()) return
+        loadingLiveEvent.postValue(
+            Message(
+                message = "loading...",
+                isCancellable = false
+            )
+        )
         auth.signInWithEmailAndPassword(
             email.value!!,
             password.value!!
         ).addOnCompleteListener { task ->
+            loadingLiveEvent.postValue(null)
             if (task.isSuccessful) {
                 Log.d(TAG, "SignInWithEmail:success")
                 getUserFromFirestore(task.result.user?.uid)

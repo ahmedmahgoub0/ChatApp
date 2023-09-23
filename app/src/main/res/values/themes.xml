@@ -1,14 +1,17 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.ChatApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/light_blue</item>
+        <!-- primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primaryDark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryVariant">@color/white</item>
-
-        <item name="colorSecondary">@color/light_blue</item>
+        <!-- secondary brand color. -->
+        <item name="colorSecondary">@color/primary</item>
+        <item name="colorSecondaryVariant">@color/primaryDark</item>
         <item name="colorOnSecondary">@color/white</item>
-        <item name="colorSecondaryVariant">@color/white</item>
+        <!-- status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
 
     </style>
 
