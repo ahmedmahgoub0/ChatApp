@@ -40,8 +40,9 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun subscribeToLiveData() {
-        viewModel.messageLiveData.observe(this) { message ->
-            showMessage(message)
+        viewModel.messageLiveData.observe(this) { message -> showMessage(message) }
+        viewModel.createUserButton.observe(this) { enable ->
+            viewBinding.content.createAccountBtn.isEnabled = enable
         }
         viewModel.loadingLiveData.observe(this, ::handleLoadingDialog)
         viewModel.eventLiveData.observe(this, ::handleEvents)

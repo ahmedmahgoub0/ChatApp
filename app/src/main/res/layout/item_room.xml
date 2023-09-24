@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_card"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="18dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="12dp">
+
+    <LinearLayout
+        android:id="@+id/item_card_container"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/room_image"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:scaleType="fitXY"
+            tools:src="@drawable/movies" />
+
+        <TextView
+            android:id="@+id/room_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            tools:text="Android room" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/room_counter"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="2dp"-->
+        <!--            android:fontFamily="@font/poppins_semi_bold"-->
+        <!--            android:textColor="@color/grey"-->
+        <!--            android:textSize="12sp"-->
+        <!--            tools:text="12 members" />-->
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

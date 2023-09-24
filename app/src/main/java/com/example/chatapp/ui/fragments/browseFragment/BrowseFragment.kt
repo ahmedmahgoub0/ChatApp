@@ -9,7 +9,7 @@ import com.example.chatapp.databinding.FragmentBrowseBinding
 
 class BrowseFragment : Fragment() {
 
-    lateinit var viewBinding: FragmentBrowseBinding
+    private lateinit var viewBinding: FragmentBrowseBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,4 +23,6 @@ class BrowseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+
 }

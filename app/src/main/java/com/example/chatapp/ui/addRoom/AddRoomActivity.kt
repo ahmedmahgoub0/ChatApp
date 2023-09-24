@@ -1,12 +1,19 @@
 package com.example.chatapp.ui.addRoom
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.chatapp.R
 import com.example.chatapp.databinding.ActivityAddRoomBinding
+import com.example.chatapp.model.Message
+import com.example.chatapp.ui.common.showLoadingProgressDialog
+import com.example.chatapp.ui.common.showMessage
 import com.example.chatapp.ui.home.HomeActivity
 
 class AddRoomActivity : AppCompatActivity() {
@@ -14,12 +21,14 @@ class AddRoomActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityAddRoomBinding
     private val viewModel: AddRoomViewModel by viewModels()
     private lateinit var spinnerAdapter: RoomCategoryAdapter
+    private var loadingDialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_room)
 
         initViews()
+        subscribeToLiveData()
     }
 
     private fun initViews() {
@@ -33,12 +42,56 @@ class AddRoomActivity : AppCompatActivity() {
 
         spinnerAdapter = RoomCategoryAdapter(viewModel.categoriesList)
         viewBinding.content.spinner.adapter = spinnerAdapter
+        viewBinding.content.spinner.onItemSelectedListener =
+            object : OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.onItemSelected(position)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+            }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        navigateToHome()
-        return true
+    private fun subscribeToLiveData() {
+        viewModel.messageLiveData.observe(this) { message ->
+            showMessage(message)
+        }
+        viewModel.loadingLiveData.observe(this, ::handleLoadingDialog)
+        viewModel.eventLiveData.observe(this, ::handleEvents)
     }
+
+
+    private fun handleLoadingDialog(message: Message?) {
+        if (message == null) {
+            // hide
+            loadingDialog?.dismiss()
+            loadingDialog = null
+            return
+        }
+        // show
+        loadingDialog = showLoadingProgressDialog(
+            message = message.message ?: "",
+            isCancellable = message.isCancellable
+        )
+        loadingDialog!!.show()
+    }
+
+    private fun handleEvents(addRoomEvent: AddRoomEvent?) {
+        when (addRoomEvent) {
+            AddRoomEvent.NavigateToHome -> {
+                navigateToHome()
+            }
+
+            else -> {}
+        }
+    }
+
 
     private fun navigateToHome() {
         val intent = Intent(this, HomeActivity::class.java)
@@ -46,7 +99,9 @@ class AddRoomActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun navigateToRoom() {
-        //
+    override fun onSupportNavigateUp(): Boolean {
+        navigateToHome()
+        return true
     }
+
 }

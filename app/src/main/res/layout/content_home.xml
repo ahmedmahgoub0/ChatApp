@@ -10,7 +10,7 @@
             name="vm"
             type="com.example.chatapp.ui.home.HomeViewModel" />
     </data>
-    
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -57,14 +57,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="18dp"
             android:contentDescription="Add room"
             android:onClick="@{()->vm.navigateToAddRoom()}"
             app:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="36dp"
             app:srcCompat="@drawable/ic_add" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

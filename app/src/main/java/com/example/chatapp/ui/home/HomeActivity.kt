@@ -9,6 +9,8 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.chatapp.R
 import com.example.chatapp.databinding.ActivityHomeBinding
 import com.example.chatapp.ui.addRoom.AddRoomActivity
+import com.example.chatapp.ui.common.showMessage
+import com.example.chatapp.ui.login.LoginActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
@@ -35,6 +37,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun subscribeToLiveData() {
         viewModel.eventLiveData.observe(this, ::handleEvent)
+        viewModel.messageLiveData.observe(this) { message ->
+            showMessage(message)
+        }
     }
 
     private fun handleEvent(viewEvent: HomeViewEvent?) {
@@ -43,15 +48,13 @@ class HomeActivity : AppCompatActivity() {
                 navigateToAddRoom()
             }
 
+            HomeViewEvent.NavigateToLogin -> {
+                navigateToLogin()
+            }
+
             else -> {}
         }
     }
-
-    private fun navigateToAddRoom() {
-        val intent = Intent(this, AddRoomActivity::class.java)
-        startActivity(intent)
-    }
-
 
     private fun setupViewPager() {
         viewPagerAdapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
@@ -89,6 +92,17 @@ class HomeActivity : AppCompatActivity() {
                     viewBinding.content.tabLayout.selectTab(selectedTab)
                 }
             })
+    }
+
+    private fun navigateToLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun navigateToAddRoom() {
+        val intent = Intent(this, AddRoomActivity::class.java)
+        startActivity(intent)
     }
 
 }

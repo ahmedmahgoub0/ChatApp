@@ -34,8 +34,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun subscribeToLiveData() {
-        viewModel.messageLiveData.observe(this) { message ->
-            showMessage(message)
+        viewModel.messageLiveData.observe(this) { message -> showMessage(message) }
+        viewModel.loginButton.observe(this) { enable ->
+            viewBinding.content.loginBtn.isEnabled = enable
         }
         viewModel.loadingLiveEvent.observe(this, ::handleLoadingDialog)
         viewModel.eventLiveData.observe(this, ::handleEvents)

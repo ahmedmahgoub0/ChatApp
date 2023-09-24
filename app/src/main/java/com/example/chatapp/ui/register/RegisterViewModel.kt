@@ -17,6 +17,8 @@ class RegisterViewModel : ViewModel() {
     val messageLiveData = SingleLiveEvent<Message>()
     val eventLiveData = SingleLiveEvent<RegisterViewEvent>()
     val loadingLiveData = SingleLiveEvent<Message?>()
+    val createUserButton = MutableLiveData(true)
+
 
     val userName = MutableLiveData<String>()
     val email = MutableLiveData<String>()
@@ -36,6 +38,7 @@ class RegisterViewModel : ViewModel() {
 
     fun register() {
         if (!validForm()) return
+        createUserButton.postValue(false)
         loadingLiveData.postValue(
             Message(
                 message = "loading...",
@@ -60,6 +63,7 @@ class RegisterViewModel : ViewModel() {
                         }
                     )
                 )
+                createUserButton.postValue(true)
             }
         }
     }

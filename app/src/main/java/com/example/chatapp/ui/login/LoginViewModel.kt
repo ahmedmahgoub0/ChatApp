@@ -17,6 +17,7 @@ class LoginViewModel : ViewModel() {
     val messageLiveData = SingleLiveEvent<Message>()
     val eventLiveData = SingleLiveEvent<LoginViewEvent>()
     val loadingLiveEvent = SingleLiveEvent<Message?>()
+    val loginButton = MutableLiveData<Boolean>(true)
 
     val email = MutableLiveData<String>("ahmed1@route.com")
     val password = MutableLiveData<String>("123456")
@@ -31,6 +32,7 @@ class LoginViewModel : ViewModel() {
 
     fun login() {
         if (!validForm()) return
+        loginButton.postValue(false)
         loadingLiveEvent.postValue(
             Message(
                 message = "loading...",
@@ -55,6 +57,7 @@ class LoginViewModel : ViewModel() {
                         }
                     )
                 )
+                loginButton.postValue(true)
             }
         }
     }
