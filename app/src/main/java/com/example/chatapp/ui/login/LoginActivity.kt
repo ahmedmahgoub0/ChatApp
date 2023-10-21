@@ -14,13 +14,13 @@ import com.example.chatapp.ui.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var viewBinding: ActivityLoginBinding
+    private var viewBinding: ActivityLoginBinding? = null
     private lateinit var viewModel: LoginViewModel
     private var loadingDialog: AlertDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(viewBinding.root)
+        setContentView(viewBinding!!.root)
 
         initViews()
         subscribeToLiveData()
@@ -28,15 +28,15 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initViews() {
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        viewBinding.lifecycleOwner = this
-        viewBinding.vm = viewModel
+        viewBinding!!.lifecycleOwner = this
+        viewBinding!!.vm = viewModel
 
     }
 
     private fun subscribeToLiveData() {
         viewModel.messageLiveData.observe(this) { message -> showMessage(message) }
         viewModel.loginButton.observe(this) { enable ->
-            viewBinding.content.loginBtn.isEnabled = enable
+            viewBinding!!.content.loginBtn.isEnabled = enable
         }
         viewModel.loadingLiveEvent.observe(this, ::handleLoadingDialog)
         viewModel.eventLiveData.observe(this, ::handleEvents)
@@ -81,6 +81,11 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewBinding = null
     }
 
 }

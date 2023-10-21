@@ -17,7 +17,7 @@ class SplashViewModel : ViewModel() {
             return
         }
         UsersDao.getUser(
-            Firebase.auth.currentUser!!.uid ?: ""
+            Firebase.auth.currentUser!!.uid
         ) { task ->
             if (!task.isSuccessful) {
                 eventLiveData.postValue(SplashViewEvent.NavigateToLogin)
@@ -27,7 +27,5 @@ class SplashViewModel : ViewModel() {
             SessionProvider.user = user
             eventLiveData.postValue(SplashViewEvent.NavigateToHome)
         }
-
-
     }
 }

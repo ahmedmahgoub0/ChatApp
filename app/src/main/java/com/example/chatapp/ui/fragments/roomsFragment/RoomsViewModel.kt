@@ -10,22 +10,12 @@ import com.example.chatapp.ui.common.SingleLiveEvent
 class RoomsViewModel : ViewModel() {
 
     val messageLiveData = SingleLiveEvent<Message>()
-    // val noRoomsYet = MutableLiveData(true)
 
     val roomsLiveData = MutableLiveData<List<Room>>()
-
     private var rooms = mutableListOf<Room>()
+
     fun loadRooms() {
         getUserRooms()
-        // room must has users id to get user rooms
-//        if (rooms.size == 0)
-//            return
-//        else {
-//            rooms.forEach() { room ->
-//                if (room.ownerId != SessionProvider.user?.id)
-//                    rooms.remove(room)
-//            }
-//        }
     }
 
     private fun getUserRooms() {
@@ -43,10 +33,8 @@ class RoomsViewModel : ViewModel() {
                     )
                 } else {
                     rooms = task.result.toObjects(Room::class.java)
-                    roomsLiveData.postValue(rooms)
+                    roomsLiveData.postValue(rooms.toMutableList())
                 }
             }
     }
-
-
 }

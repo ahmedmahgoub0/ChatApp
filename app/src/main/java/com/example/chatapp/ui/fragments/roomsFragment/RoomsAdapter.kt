@@ -19,6 +19,9 @@ class RoomsAdapter(var roomsList: List<Room>?) : RecyclerView.Adapter<RoomsAdapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val room = roomsList?.get(position)
         holder.bind(room!!)
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.onItemClick(position, room)
+        }
     }
 
     override fun getItemCount(): Int = roomsList?.size ?: 0
@@ -33,8 +36,16 @@ class RoomsAdapter(var roomsList: List<Room>?) : RecyclerView.Adapter<RoomsAdapt
 
     }
 
+    var onItemClickListener: OnItemClickListener? = null
+
+    fun interface OnItemClickListener {
+        fun onItemClick(position: Int, room: Room)
+    }
+
     fun changeData(rooms: List<Room>) {
         roomsList = rooms
         notifyDataSetChanged()
     }
+
+
 }

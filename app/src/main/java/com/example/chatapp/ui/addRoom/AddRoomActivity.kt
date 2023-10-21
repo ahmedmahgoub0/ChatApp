@@ -1,7 +1,6 @@
 package com.example.chatapp.ui.addRoom
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -14,11 +13,10 @@ import com.example.chatapp.databinding.ActivityAddRoomBinding
 import com.example.chatapp.model.Message
 import com.example.chatapp.ui.common.showLoadingProgressDialog
 import com.example.chatapp.ui.common.showMessage
-import com.example.chatapp.ui.home.HomeActivity
 
 class AddRoomActivity : AppCompatActivity() {
 
-    private lateinit var viewBinding: ActivityAddRoomBinding
+    private var viewBinding: ActivityAddRoomBinding? = null
     private val viewModel: AddRoomViewModel by viewModels()
     private lateinit var spinnerAdapter: RoomCategoryAdapter
     private var loadingDialog: AlertDialog? = null
@@ -32,17 +30,17 @@ class AddRoomActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        setSupportActionBar(viewBinding.toolbar)
+        setSupportActionBar(viewBinding!!.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = null
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
 
-        viewBinding.vm = viewModel
-        viewBinding.lifecycleOwner = this
+        viewBinding!!.vm = viewModel
+        viewBinding!!.lifecycleOwner = this
 
         spinnerAdapter = RoomCategoryAdapter(viewModel.categoriesList)
-        viewBinding.content.spinner.adapter = spinnerAdapter
-        viewBinding.content.spinner.onItemSelectedListener =
+        viewBinding!!.content.spinner.adapter = spinnerAdapter
+        viewBinding!!.content.spinner.onItemSelectedListener =
             object : OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -94,14 +92,18 @@ class AddRoomActivity : AppCompatActivity() {
 
 
     private fun navigateToHome() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
+        onBackPressedDispatcher.onBackPressed()
         finish()
     }
 
     override fun onSupportNavigateUp(): Boolean {
         navigateToHome()
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewBinding = null
     }
 
 }

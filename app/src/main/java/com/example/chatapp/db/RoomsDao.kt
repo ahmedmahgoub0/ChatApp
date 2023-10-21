@@ -9,7 +9,7 @@ import com.google.firebase.ktx.Firebase
 
 object RoomsDao {
 
-    private fun getCollectionRef(): CollectionReference {
+    fun getCollectionRef(): CollectionReference {
         return Firebase.firestore.collection(Room.COLLECTION_NAME)
     }
 

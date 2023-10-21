@@ -14,12 +14,12 @@ import com.example.chatapp.ui.login.LoginActivity
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private val viewModel: SplashViewModel by viewModels()
-    private lateinit var viewBinding: ActivitySplashBinding
+    private var viewBinding: ActivitySplashBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(viewBinding.root)
+        setContentView(viewBinding!!.root)
 
         subscribeToLiveData()
         showSplash()
@@ -54,5 +54,10 @@ class SplashActivity : AppCompatActivity() {
             .postDelayed({
                 viewModel.redirect()
             }, 1500)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewBinding = null
     }
 }

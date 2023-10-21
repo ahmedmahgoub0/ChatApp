@@ -15,14 +15,14 @@ import com.example.chatapp.ui.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var viewBinding: ActivityRegisterBinding
+    private var viewBinding: ActivityRegisterBinding? = null
     private lateinit var viewModel: RegisterViewModel
     private var loadingDialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityRegisterBinding.inflate(layoutInflater)
-        setContentView(viewBinding.root)
+        setContentView(viewBinding!!.root)
 
         initViews()
         subscribeToLiveData()
@@ -30,10 +30,10 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun initViews() {
         viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
-        viewBinding.lifecycleOwner = this
-        viewBinding.vm = viewModel
+        viewBinding!!.lifecycleOwner = this
+        viewBinding!!.vm = viewModel
         // activate arrow back in action bar
-        setSupportActionBar(viewBinding.toolbar)
+        setSupportActionBar(viewBinding!!.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = null
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
@@ -42,7 +42,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun subscribeToLiveData() {
         viewModel.messageLiveData.observe(this) { message -> showMessage(message) }
         viewModel.createUserButton.observe(this) { enable ->
-            viewBinding.content.createAccountBtn.isEnabled = enable
+            viewBinding!!.content.createAccountBtn.isEnabled = enable
         }
         viewModel.loadingLiveData.observe(this, ::handleLoadingDialog)
         viewModel.eventLiveData.observe(this, ::handleEvents)
@@ -92,6 +92,11 @@ class RegisterActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         navigateToLogin()
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewBinding = null
     }
 
 }

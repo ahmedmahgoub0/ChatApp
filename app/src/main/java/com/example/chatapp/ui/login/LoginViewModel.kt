@@ -17,10 +17,10 @@ class LoginViewModel : ViewModel() {
     val messageLiveData = SingleLiveEvent<Message>()
     val eventLiveData = SingleLiveEvent<LoginViewEvent>()
     val loadingLiveEvent = SingleLiveEvent<Message?>()
-    val loginButton = MutableLiveData<Boolean>(true)
+    val loginButton = MutableLiveData(true)
 
-    val email = MutableLiveData<String>("ahmed1@route.com")
-    val password = MutableLiveData<String>("123456")
+    val email = MutableLiveData<String>()
+    val password = MutableLiveData<String>()
     val emailError = MutableLiveData<String?>()
     val passwordError = MutableLiveData<String?>()
 
